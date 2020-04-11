@@ -701,6 +701,7 @@ class _DashboardState extends State<Dashboard> {
               CustomListTile(Icons.filter_2, 'Shirts', () => {}),
               CustomListTile(Icons.filter_3, 'Pants', () => {}),
               //CustomListTile(Icons.filter_4, 'log out', () => {}),
+              IconButton(icon: Icon(Icons.lock), onPressed: (){})
             ],
           ),
         ),
@@ -931,7 +932,7 @@ class CustomListTile extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: Colors.grey[400]))),
         child: InkWell(
-          splashColor: Colors.blueAccent,
+          splashColor: Colors.brown,
           onTap: onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'stockDet.dart';
+import 'DressesList.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -693,8 +694,8 @@ class _DashboardState extends State<Dashboard> {
                 Icons.filter_1,
                 'Dresses',
                     () => {
-                  print('Hello'),
-                  //Navigator.push(context, MaterialPageRoute(builder: (context){return SignUp();})),
+                  //print('Hello'),
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return DressesList();})),
 
                 },
               ),

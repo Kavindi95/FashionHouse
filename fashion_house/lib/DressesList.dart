@@ -65,7 +65,7 @@ class ShowDressListState extends State<ShowDressList> {
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: Colors.brown),
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(

@@ -8,8 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'file:///E:/SLIIT/4th_year_1st_sem/CTSE/project/FinalProject/FashionHouse/fashion_house/lib/view/main.dart';
-
+//import 'file:///E:/SLIIT/4th_year_1st_sem/CTSE/project/FinalProject/FashionHouse/fashion_house/lib/view/main.dart';
+import 'package:fashionhouse/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../controler/api.dart';
+import '../controler/dress_api.dart';
 import '../model/dresses.dart';
 
 class DressesList extends StatelessWidget {

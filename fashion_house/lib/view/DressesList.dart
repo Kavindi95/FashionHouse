@@ -70,22 +70,39 @@ class ShowDressListState extends State<ShowDressList> {
         ),
         child: ListTile(
           title: Text(dress.name),
-          trailing: IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: (){
-              delete(dress);
-            },
+          trailing: Wrap(
+            spacing: 1,
+            children: <Widget>[
+             IconButton(
+                 icon: Icon(Icons.delete),
+                 onPressed: (){
+                   delete(dress);
+                 }
+             ),
+              IconButton(
+                  icon: Icon(Icons.update),
+                  onPressed: (){
+                    print("update");
+                  }
+              )
+            ],
           ),
+
+
           onTap: (){
             //update
-            setUpdateUI(dress);
+            print('jfhgdjhfgfjgjehbrj');
+            //setUpdateUI(dress);
+
           },
         ),
+
       ),
     );
   }
 
   setUpdateUI(Dresses dress){
+
     controller.text = dress.name;
     setState(() {
       showTextField = true;

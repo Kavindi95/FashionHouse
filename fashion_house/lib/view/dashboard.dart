@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/stockDet.dart';
 import 'DressesList.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -36,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   //cardone
-  Widget CardOne(stock) {
+  Widget CardOne(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -70,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          stock.valueOne,
+                          name,
                           style: TextStyle(
                             //fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -88,7 +88,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //cardTwo
-  Widget CardTwo(stock) {
+  Widget CardTwo(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -122,7 +122,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          stock.valueTwo,
+                          name,
                           style: TextStyle(
                             // fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -140,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardThree
-  Widget CardThree(stock) {
+  Widget CardThree(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -174,7 +174,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          stock.valueThree,
+                          name,
                           style: TextStyle(
                             //fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -192,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardFour
-  Widget CardFour(stock) {
+  Widget CardFour(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -227,7 +227,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          stock.valueFour,
+                          name,
                           style: TextStyle(
                             //fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -245,7 +245,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CadrFive
-  Widget CardFive(stock) {
+  Widget CardFive(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -279,7 +279,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          "\$ " + stock.tRevenue,
+                          "\$ " + name,
                           style: TextStyle(
                             //fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -297,7 +297,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardSiz
-  Widget CardSix(stock) {
+  Widget CardSix(name) {
     return Card(
       color: Colors.brown[50],
       child: Column(
@@ -331,7 +331,7 @@ class _DashboardState extends State<Dashboard> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
                         child: Text(
-                          "\$ " + stock.tCost,
+                          "\$ " + name,
                           style: TextStyle(
                             //fontWeight: FontWeight.bold,
                               fontSize: 20.0),
@@ -348,293 +348,7 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-// card tempalte for Invetory Activities
-  Widget CardOneTemplate(stock) {
-    return Container(
-      color: Colors.blue,
-      child: Card(
-        //color: Colors.teal,
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/opacityone.png'),
-                  fit: BoxFit.cover)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                //row 1
-                Row(
-                  children: <Widget>[
-//
-                    Expanded(
-                      flex: 2,
-                      child: Container(),
-                    ),
-                    Expanded(
-                        flex: 10,
-                        child: Container(
-                            child: Text(
-                              'Inventory Activities',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17.0,
-                                  color: Colors.black),
-                            ))),
-                    Expanded(
-                      flex: 2,
-                      child: Container(),
-                    ),
-                  ],
-                ),
 
-                //divider 3
-                Divider(
-                  height: 20.0,
-                  color: Colors.grey[600],
-                ),
-                //row 2
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: Text(
-                          stock.propertyOne,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                    Expanded(flex: 2, child: Container()),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Text(
-                          stock.valueOne,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-//divider 2
-                Divider(
-                  height: 20.0,
-                  color: Colors.grey[600],
-                ),
-                //row3
-                Row(
-                  children: <Widget>[
-//
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: Text(
-                          stock.propertyTwo,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                    Expanded(flex: 2, child: Container()),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Text(
-                          stock.valueTwo,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                //divide 3
-                Divider(
-                  height: 20.0,
-                  color: Colors.grey[600],
-                ),
-                //row 4
-                Row(
-                  children: <Widget>[
-//
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: Text(
-                          stock.propertyThree,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                    Expanded(flex: 2, child: Container()),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Text(
-                          stock.valueThree,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                //divider 4
-                Divider(
-                  height: 20.0,
-                  color: Colors.grey[600],
-                ),
-                //row 5
-                Row(
-                  children: <Widget>[
-//
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        child: Text(
-                          stock.propertyFour,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                    Expanded(flex: 2, child: Container()),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Text(
-                          stock.valueFour,
-                          style: TextStyle(
-                              fontSize: 17.0, color: Colors.grey[350]),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  //card template for total revenue
-  Widget revenueCardTemplate(stock) {
-    return Card(
-      //color: Colors.lightGreen[300],
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: <Color>[
-            Colors.lightGreen[700],
-            Colors.lightGreen[600],
-            Colors.lightGreen[400]
-          ]),
-        ),
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-                          child: Text(
-                            'Total Revenue',
-                            style: TextStyle(fontSize: 17.0),
-                          ),
-                        )),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
-                      child: Center(
-                        child: Text(
-                          "\$ " + stock.tRevenue,
-                          style: TextStyle(fontSize: 17.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget costCardTemplate(stock) {
-    return Card(
-      //color: Colors.amberAccent[100],
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              end: Alignment.bottomLeft,
-              //stops: [0.1, 0.3, 0.7],
-              colors: [
-                Colors.yellow[800],
-                Colors.yellow[700],
-                Colors.yellow[600]
-              ]),
-        ),
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
-                          child: Text(
-                            'Total Cost',
-                            style: TextStyle(fontSize: 17.0),
-                          ),
-                        )),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
-                      child: Center(
-                        child: Text(
-                          "\$ " + stock.tCost,
-                          style: TextStyle(fontSize: 17.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -706,215 +420,227 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('images/bodyone.png'), fit: BoxFit.cover)),
-          child: Column(
-            children: <Widget>[
-              //SizedBox(height: 25.0),
-              //Dashboard Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          'Dashboard',
-                          style: TextStyle(
-                              fontSize: 25.0, fontWeight: FontWeight.bold),
-                        ),
-                      ))
-                ],
-              ),
+        body:StreamBuilder(
+          stream:Firestore.instance.collection('dashboardStock').snapshots(),
+          builder: (context,snapshot){
+            if(!snapshot.hasData){
+              return Text("Luading.... please wait");
+            }
+            if(snapshot.hasData){
+              return Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('images/bodyone.png'), fit: BoxFit.cover)),
+                child: Column(
+                  children: <Widget>[
+                    //SizedBox(height: 25.0),
+                    //Dashboard Row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Dashboard',
+                                style: TextStyle(
+                                    fontSize: 25.0, fontWeight: FontWeight.bold),
+                              ),
+                            ))
+                      ],
+                    ),
 
-              //DRow1
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
+                    //DRow1
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
 //                      row 1 space 1
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          // column for card 1
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardOne(snapshot.data.documents[0]['stock'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row1 space 2
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.orange,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          //column for card 2
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardTwo(snapshot.data.documents[0]['shipping'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row 1 space 3
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    // column for card 1
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardOne(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row1 space 2
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    //column for card 2
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardTwo(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row 1 space 3
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.blue,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
 
-              SizedBox(height: 60.0),
-              //DRow2
+                    SizedBox(height: 60.0),
+                    //DRow2
 
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
 //                      row 2 space 1
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          //color: Colors.blue,
-                          child: Container(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                //color: Colors.blue,
+                                child: Container(),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          // column for card 3
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardThree(snapshot.data.documents[0]['orders'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row 2 space 2
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.orange,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          //column for card 4
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardFour(snapshot.data.documents[0]['delivery'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row 2 space 3
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    // column for card 3
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardThree(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row 2 space 2
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                    SizedBox(height: 60.0),
+                    //DRow3
+                    Row(
                       children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    //column for card 4
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardFour(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row 2 space 3
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.blue,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 60.0),
-              //DRow3
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
+                        Expanded(
+                          flex: 1,
 //                      row 3 space 1
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          color: Colors.blue,
-                          child: Container(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                color: Colors.blue,
+                                child: Container(),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          // column for card 5
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardFive(snapshot.data.documents[0]['revenue'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row 3 space 2
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.orange,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          //column for card 6
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children:
+                              stocks.map((stock) => CardSix(snapshot.data.documents[0]['cost'])).toList()),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          //row 3 space 3
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: <Widget>[
+                              Container(
+                                child: Container(),
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    // column for card 5
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardFive(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row 3 space 2
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    //column for card 6
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children:
-                        stocks.map((stock) => CardSix(stock)).toList()),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    //row 3 space 3
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: Container(),
-                          color: Colors.blue,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ));
+                  ],
+                ),
+              );
+            }
+            return CircularProgressIndicator();
+          },
+        )
+    );
   }
 }
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../model/stockDet.dart';
 import 'DressesList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'PantsList.dart';
+import 'ShirtsList.dart';
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -413,8 +415,18 @@ class _DashboardState extends State<Dashboard> {
 
                 },
               ),
-              CustomListTile(Icons.filter_2, 'Shirts', () => {}),
-              CustomListTile(Icons.filter_3, 'Pants', () => {}),
+              CustomListTile(
+                  Icons.filter_2,
+                  'Shirts',
+                      () => {
+                        Navigator.push(context, MaterialPageRoute(builder: (context){return ShirtsList();})),
+              }),
+              CustomListTile(
+                  Icons.filter_3,
+                  'Pants',
+                      () => {
+                        Navigator.push(context, MaterialPageRoute(builder: (context){return PantsList();})),
+                      }),
               //CustomListTile(Icons.filter_4, 'log out', () => {}),
               IconButton(icon: Icon(Icons.lock), onPressed: (){})
             ],

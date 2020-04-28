@@ -1,45 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../controler/pants_api.dart';
-import '../model/pants.dart';
+import '../controler/shirts_api.dart';
+import '../model/shirts.dart';
 
-class PantsList extends StatelessWidget {
+class ShirtsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ShowPantsList(),
+      home: ShowShirtsList(),
     );
   }
 }
 
-class ShowPantsList extends StatefulWidget {
-  ShowPantsList() : super();
-  ShowPantsListState createState() => ShowPantsListState();
+class ShowShirtsList extends StatefulWidget {
+  ShowShirtsList() : super();
+  ShowShirtsListState createState() => ShowShirtsListState();
 
 }
 
-class ShowPantsListState extends State<ShowPantsList> {
+class ShowShirtsListState extends State<ShowShirtsList> {
 
   bool showTextField = false;
   TextEditingController controller = TextEditingController();
   bool isEditing = false;
-  Pants pantsnew;
+  Shirts shirtsnew;
 
   add(){
     if(isEditing){
-      update(pantsnew, controller.text);
+      update(shirtsnew, controller.text);
       setState(() {
         isEditing=false;
       });
     }else{
-      addPants(controller.text);
+      addShirts(controller.text);
     }
     controller.text='';
   }
 
   Widget buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: getPants(),
+      stream: getShirts(),
       builder: (context, snapshot) {
         if(snapshot.hasError) {
           return Text('Error ${snapshot.error}');
@@ -60,9 +60,9 @@ class ShowPantsListState extends State<ShowPantsList> {
   }
 
   Widget buildListItem(BuildContext context, DocumentSnapshot data){
-    final pants=Pants.fromSnapshot(data);
+    final shirts=Shirts.fromSnapshot(data);
     return Padding(
-      key:ValueKey(pants.pname),
+      key:ValueKey(shirts.sname),
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -70,14 +70,14 @@ class ShowPantsListState extends State<ShowPantsList> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(pants.pname),
+          title: Text(shirts.sname),
           trailing: Wrap(
             spacing: 1,
             children: <Widget>[
               IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: (){
-                    delete(pants);
+                    delete(shirts);
                   }
               ),
               IconButton(
@@ -102,13 +102,13 @@ class ShowPantsListState extends State<ShowPantsList> {
     );
   }
 
-  setUpdateUI(Pants pant){
+  setUpdateUI(Shirts shirts){
 
-    controller.text = pant.pname;
+    controller.text = shirts.sname;
     setState(() {
       showTextField = true;
       isEditing = true;
-      pantsnew = pant;
+      shirtsnew = shirts;
     });
   }
 
@@ -156,7 +156,7 @@ class ShowPantsListState extends State<ShowPantsList> {
               height: 20,
             ),
             Text(
-              "Pants",
+              "Shirts",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
             ),
             SizedBox(
@@ -170,5 +170,4 @@ class ShowPantsListState extends State<ShowPantsList> {
       ),
     );
   }
-
 }

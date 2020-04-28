@@ -9,8 +9,8 @@ getPants() {
 }
 
 //add a new pant
-addPants(String Name){
-  Pants pants = Pants(pname: Name);
+addPants(String Name, int Price){
+  Pants pants = Pants(pname: Name, pprice: Price);
   try{
     Firestore.instance.runTransaction(
           (Transaction transaction) async{

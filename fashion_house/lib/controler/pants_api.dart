@@ -10,14 +10,14 @@ getPants() {
 
 //add a new pant
 addPants(String Name){
-  Pants dress = Pants(pname: Name);
+  Pants pants = Pants(pname: Name);
   try{
     Firestore.instance.runTransaction(
           (Transaction transaction) async{
         await Firestore.instance
             .collection(collectionName)
             .document()
-            .setData(dress.toJson());
+            .setData(pants.toJson());
       },
     );
   } catch(e){

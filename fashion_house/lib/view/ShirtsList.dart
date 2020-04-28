@@ -7,6 +7,7 @@ class ShirtsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Shirts Interface",
       home: ShowShirtsList(),
     );
   }
@@ -14,6 +15,7 @@ class ShirtsList extends StatelessWidget {
 
 class ShowShirtsList extends StatefulWidget {
   ShowShirtsList() : super();
+  final String title = "Shirts Store";
   ShowShirtsListState createState() => ShowShirtsListState();
 
 }
@@ -21,20 +23,22 @@ class ShowShirtsList extends StatefulWidget {
 class ShowShirtsListState extends State<ShowShirtsList> {
 
   bool showTextField = false;
-  TextEditingController controller = TextEditingController();
+  TextEditingController nameInputcontroller = TextEditingController();
+  TextEditingController priceInputController = TextEditingController();
   bool isEditing = false;
   Shirts shirtsnew;
 
   add(){
     if(isEditing){
-      update(shirtsnew, controller.text);
+      update(shirtsnew, nameInputcontroller.text);
       setState(() {
         isEditing=false;
       });
     }else{
-      addShirts(controller.text);
+      addShirts(nameInputcontroller.text, int.parse(priceInputController.text));
     }
-    controller.text='';
+    nameInputcontroller.text='';
+    priceInputController.text='';
   }
 
   Widget buildBody(BuildContext context) {
@@ -104,7 +108,7 @@ class ShowShirtsListState extends State<ShowShirtsList> {
 
   setUpdateUI(Shirts shirts){
 
-    controller.text = shirts.sname;
+    nameInputcontroller.text = shirts.sname;
     setState(() {
       showTextField = true;
       isEditing = true;
@@ -129,6 +133,20 @@ class ShowShirtsListState extends State<ShowShirtsList> {
 
   Widget build(BuildContext context){
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.brown,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){
+              setState(() {
+                showTextField = !showTextField;
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:Column(
@@ -141,9 +159,14 @@ class ShowShirtsListState extends State<ShowShirtsList> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
-                  controller: controller,
+                  controller: nameInputcontroller,
                   decoration: InputDecoration(
-                      labelText: "Name",hintText:"Enter name"),
+                      labelText: "Name",hintText:"Enter shirt name"),
+                ),
+                TextFormField(
+                  controller: priceInputController,
+                  decoration: InputDecoration(
+                      labelText: "Price",hintText:"Enter shirt price"),
                 ),
                 SizedBox(
                   height: 10,

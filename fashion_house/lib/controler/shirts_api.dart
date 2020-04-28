@@ -9,15 +9,16 @@ getShirts() {
 }
 
 //add a new shirt
-addShirts(String Name){
-  Shirts dress = Shirts(sname: Name);
+addShirts(String Name, int Price){
+  Shirts shirts = Shirts(sname: Name, sprice: Price);
+  //Shirts dressPrice = Shirts(sprice: Price);
   try{
     Firestore.instance.runTransaction(
           (Transaction transaction) async{
         await Firestore.instance
             .collection(collectionName)
             .document()
-            .setData(dress.toJson());
+            .setData(shirts.toJson());
       },
     );
   } catch(e){

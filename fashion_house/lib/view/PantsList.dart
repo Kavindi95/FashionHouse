@@ -7,6 +7,7 @@ class PantsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Pants Interface",
       home: ShowPantsList(),
     );
   }
@@ -14,6 +15,7 @@ class PantsList extends StatelessWidget {
 
 class ShowPantsList extends StatefulWidget {
   ShowPantsList() : super();
+  final String title = "Pants Store";
   ShowPantsListState createState() => ShowPantsListState();
 
 }
@@ -129,6 +131,20 @@ class ShowPantsListState extends State<ShowPantsList> {
 
   Widget build(BuildContext context){
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.brown,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){
+              setState(() {
+                showTextField = !showTextField;
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:Column(

@@ -7,6 +7,7 @@ class DressesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Dresses Interface',
       home: ShowDressList(),
     );
   }
@@ -14,6 +15,7 @@ class DressesList extends StatelessWidget {
 
 class ShowDressList extends StatefulWidget {
   ShowDressList() : super();
+  final String title ="Dresses Store";
   ShowDressListState createState() => ShowDressListState();
 
 }
@@ -23,6 +25,9 @@ class ShowDressListState extends State<ShowDressList> {
   TextEditingController controller = TextEditingController();
   bool isEditing = false;
   Dresses dressnew;
+  //new
+  String newName;
+  String newPrice;
 
   add(){
     if(isEditing){
@@ -128,6 +133,20 @@ class ShowDressListState extends State<ShowDressList> {
 
   Widget build(BuildContext context){
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.brown,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: (){
+              setState(() {
+                showTextField = !showTextField;
+              });
+            },
+          ),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:Column(

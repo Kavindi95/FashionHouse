@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../controler/user_api.dart';
 import '../main.dart';
 import '../view/dashboard.dart';
+import 'signin.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -139,7 +140,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Center(
               child: RaisedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){return MyHomePage();}));
+                Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
               },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),

@@ -32,7 +32,7 @@ class ShowDressListState extends State<ShowDressList> {
 
   add(){
     if(isEditing){
-      update(dressnew, dressNameInputcontroller.text);
+      update(dressnew, dressNameInputcontroller.text, int.parse(dressPriceInputController.text));
       setState(() {
         isEditing=false;
       });
@@ -40,6 +40,7 @@ class ShowDressListState extends State<ShowDressList> {
       addDress(dressNameInputcontroller.text, int.parse(dressPriceInputController.text));
     }
     dressNameInputcontroller.text='';
+    dressPriceInputController.text='';
   }
 
   Widget buildBody(BuildContext context) {
@@ -74,33 +75,48 @@ class ShowDressListState extends State<ShowDressList> {
           border: Border.all(color: Colors.brown),
           borderRadius: BorderRadius.circular(5.0),
         ),
-        child: ListTile(
-          title: Text(dress.name),
-          trailing: Wrap(
-            spacing: 1,
-            children: <Widget>[
-             IconButton(
-                 icon: Icon(Icons.delete),
-                 onPressed: (){
-                   delete(dress);
-                 }
-             ),
-              IconButton(
-                  icon: Icon(Icons.update),
-                  onPressed: (){
-                    print("update");
-                  }
-              )
-            ],
-          ),
-
-
-          onTap: (){
-            //update
-            print('jfhgdjhfgfjgjehbrj');
-            //setUpdateUI(dress);
-
-          },
+        child: Column(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        //Colors.yellow[200],
+                        Colors.grey,
+                        Colors.grey[300]
+                      ])
+              ),
+              child: ListTile(
+                title: Text(
+                  dress.name,
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Wrap(
+                  spacing: 1,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: (){
+                          delete(dress);
+                        }
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.update),
+                        onPressed: (){
+                          setUpdateUI(dress);
+                        }
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
 
       ),
@@ -110,6 +126,7 @@ class ShowDressListState extends State<ShowDressList> {
   setUpdateUI(Dresses dress){
 
     dressNameInputcontroller.text = dress.name;
+    dressPriceInputController.text =(dress.price).toString();
     setState(() {
       showTextField = true;
       isEditing = true;
@@ -180,8 +197,8 @@ class ShowDressListState extends State<ShowDressList> {
               height: 20,
             ),
             Text(
-              "Dresses",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+              "Dresses Collection Details",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.brown),
             ),
             SizedBox(
               height: 20,

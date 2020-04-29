@@ -369,6 +369,7 @@ class _DashboardState extends State<Dashboard> {
 //            ),
 //          ),
 //        ),
+        
           backgroundColor: Colors.brown,
         ),
         drawer: Drawer(
@@ -473,12 +474,18 @@ class _DashboardState extends State<Dashboard> {
                                     fontSize: 25.0, fontWeight: FontWeight.bold),
                               ),
                             )),
+                        SizedBox(width:80.0 ),
                         Container(
                             child: Column(
                               //mainAxisAlignment: MainAxisAlignment.end,
                               //crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
                                 RaisedButton(
+                                  color: Colors.brown[200],
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: new BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.brown)
+                                  ),
                                   onPressed: (){
                                     Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
                                   },
@@ -672,6 +679,7 @@ class _DashboardState extends State<Dashboard> {
                         )
                       ],
                     ),
+
                   ],
                 ),
               );

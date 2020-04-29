@@ -28,6 +28,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
 //      appBar: AppBar(
 //        backgroundColor: Colors.brown,
 //      ),
@@ -86,7 +87,7 @@ class _SignUpState extends State<SignUp> {
 
             Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
                 child: TextFormField(
                   controller: unamecontroller,
                   decoration: InputDecoration(
@@ -103,7 +104,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Center(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 20.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
                 child: TextFormField(
                   obscureText: true,
                   controller: passwordcontroller,

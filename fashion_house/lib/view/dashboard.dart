@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'PantsList.dart';
 import 'ShirtsList.dart';
 import 'TransactionList.dart';
+import 'signin.dart';
+
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -470,6 +472,19 @@ class _DashboardState extends State<Dashboard> {
                                 style: TextStyle(
                                     fontSize: 25.0, fontWeight: FontWeight.bold),
                               ),
+                            )),
+                        Container(
+                            child: Column(
+                              //mainAxisAlignment: MainAxisAlignment.end,
+                              //crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                RaisedButton(
+                                  onPressed: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
+                                  },
+                                  child: Text('SIGN OUT'),
+                                ),
+                              ],
                             ))
                       ],
                     ),

@@ -4,6 +4,7 @@ import '../controler/user_api.dart';
 import '../main.dart';
 import '../view/dashboard.dart';
 import 'signin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -11,21 +12,11 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController unamecontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
-  TextEditingController firstnamecontroller = TextEditingController();
 
+  //***
+  String _email, _password;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  add(){
-
-
-    addUsers(unamecontroller.text,passwordcontroller.text,firstnamecontroller.text);
-
-    unamecontroller.text='';
-    passwordcontroller.text='';
-    firstnamecontroller.text='';
-   ;
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,32 +24,34 @@ class _SignUpState extends State<SignUp> {
 //      appBar: AppBar(
 //        backgroundColor: Colors.brown,
 //      ),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  //Colors.red[200],
-                  Colors.brown[300],
-                  Colors.grey[50]
-                ])),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Column(
+      body: Form(
+        key: _formKey,
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    //Colors.red[200],
+                    Colors.orange[100],
+                    Colors.white
+                  ])),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
 
-          children: <Widget>[
-            //Divider(height: 70.0,),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0.0,70.0,20.0,10.0),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('images/logo.png'),
-                  radius: 60.0,
+            children: <Widget>[
+              //Divider(height: 70.0,),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0,70.0,20.0,10.0),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('images/logo.png'),
+                    radius: 80.0,
+                  ),
                 ),
               ),
-            ),
-            // Divider(height: 50.0, color: Colors.brown[700], thickness: 5.0,),
+              // Divider(height: 50.0, color: Colors.brown[700], thickness: 5.0,),
 //            Row(
 //              mainAxisAlignment: MainAxisAlignment.start,
 //              children: <Widget>[
@@ -66,91 +59,123 @@ class _SignUpState extends State<SignUp> {
 //                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 30.0),),
 //              ],
 //            ),
-            Divider(height:30.0),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
-                child: TextFormField(
-                 // obscureText: true,
-                  controller: firstnamecontroller,
-                  decoration: InputDecoration(
-                      filled: true,
-
-                      border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(30.0),
-                        ),
-                      ),
-                      labelText: "First name",hintText:"Enter firstname"),
-                ),
-              ),
-            ),
-
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 0.0),
-                child: TextFormField(
-                  controller: unamecontroller,
-                  decoration: InputDecoration(
-                      filled: true,
-
-                      border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(30.0),
-                        ),
-                      ),
-                      labelText: "Username",hintText:"Enter username"),
-                ),
-              ),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
-                child: TextFormField(
-                  obscureText: true,
-                  controller: passwordcontroller,
-                  decoration: InputDecoration(
-                      filled: true,
-                      border: new OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                          const Radius.circular(30.0),
-                        ),
-                      ),
-                      labelText: "Password",hintText:"Enter password"),
-                ),
-              ),
-            ),
-
-            Center(
-              child: RaisedButton(onPressed: (){
-                add();
-                Navigator.push(context, MaterialPageRoute(builder: (context){return Dashboard();}));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text('SIGN UP',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0),),
-              ),
-              color: Colors.yellow[700],),
-            ),
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text('Already have an account?',style: TextStyle(fontSize: 15.0),),
-              ),
-            ),
-            Center(
-              child: RaisedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
-              },
+              Divider(height:70.0,
+                thickness: 5.0,),
+              Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text('SIGN IN',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0,color: Colors.white),),
+                  padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
+                  child: SizedBox(
+                    height: 50.0,
+                    child: TextFormField(
+                      validator: (input){
+                        if(input.isEmpty){
+                          return'Please type email';
+                        }
+                      },
+                      onSaved: (input) => _email = input,
+                      decoration: InputDecoration(
+                          filled: true,
+
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(30.0),
+                            ),
+                          ),
+                          labelText: "Username",hintText:"Enter Username"),
+                    ),
+                  ),
                 ),
-                color: Colors.teal[800],),
-            )
-          ],
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
+                  child: SizedBox(
+                    height: 50.0,
+                    child: TextFormField(
+                      obscureText: true,
+                      validator: (input){
+                        if(input.length<6){
+                          return'Please enter password more than 6 characters';
+                        }
+                      },
+                      onSaved: (input) => _password = input,
+                      decoration: InputDecoration(
+                          filled: true,
+                          border: new OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(30.0),
+                            ),
+                          ),
+                          labelText: "Password",hintText:"Enter password"),
+                    ),
+                  ),
+                ),
+              ),
+
+              Center(
+                child: SizedBox(
+                  width: 290.0,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.red)
+                    ),
+                    onPressed: signUp,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text('SIGN UP',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0,color: Colors.white),),
+                    ),
+                    color: Colors.orangeAccent[700],),
+                ),
+              ),
+              SizedBox(height: 80.0,),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0,12.0,0.0,12.0),
+                  child: Text('Already have an account?',style: TextStyle(fontSize: 15.0),),
+                ),
+              ),
+              Center(
+                child: SizedBox(
+                  width: 290.0,
+                  child: RaisedButton(
+
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.red)
+                    ),
+                    onPressed: (){
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text('SIGN IN',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0,color: Colors.white),),
+                    ),
+                    color: Colors.redAccent,),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> signUp() async{
+    final formState = _formKey.currentState;
+    if(formState.validate()){
+      formState.save();
+      try{
+        FirebaseUser user= (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password)).user;
+        user.sendEmailVerification();
+        //print(result);
+        //FirebaseUser user = result.user;
+        //await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
+      }catch(e){
+        print(e.message);
+      }
+    }
   }
 }

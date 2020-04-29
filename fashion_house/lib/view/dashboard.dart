@@ -5,6 +5,7 @@ import 'DressesList.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'PantsList.dart';
 import 'ShirtsList.dart';
+import 'TransactionList.dart';
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -428,7 +429,18 @@ class _DashboardState extends State<Dashboard> {
                         Navigator.push(context, MaterialPageRoute(builder: (context){return PantsList();})),
                       }),
               //CustomListTile(Icons.filter_4, 'log out', () => {}),
-              IconButton(icon: Icon(Icons.lock), onPressed: (){})
+              Padding(
+                padding: const EdgeInsets.only(top:8.0),
+                child: RaisedButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return Orders();}));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15.0,10.0,15.0,10.0),
+                  child: Text('View Order list',style: TextStyle(fontSize: 15.0),),
+                ),
+                  color: Colors.brown[100],
+                ),
+              )
             ],
           ),
         ),

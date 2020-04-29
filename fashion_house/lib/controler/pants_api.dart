@@ -26,10 +26,10 @@ addPants(String Name, int Price){
 }
 
 //update a pant
-update(Pants dress, String newName){
+update(Pants dress, String newName, int newPrice){
   try {
     Firestore.instance.runTransaction((transaction) async {
-      await transaction.update(dress.reference, {'pname': newName});
+      await transaction.update(dress.reference, {'pname': newName, 'pprice':newPrice});
     });
   } catch(e) {
     print(e.toString());

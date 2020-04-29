@@ -51,7 +51,7 @@ class _SigninState extends State<Signin> {
                     style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.pink
+                        color: Colors.brown
                     ),
                   ),
                 ),
@@ -103,21 +103,25 @@ class _SigninState extends State<Signin> {
                           ),
                         ),
                         Center(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0.0,0.0,10.0,10.0),
-                            child: RaisedButton(
-                              color: Colors.pink,
-                              shape: RoundedRectangleBorder(
+                          child: Container(
+                            width: 250.0,
+                            height: 50.0,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0.0,0.0,10.0,10.0),
+                              child: RaisedButton(
+                                color: Colors.brown,
+                                shape: RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(20.0),
-                                  side: BorderSide(color: Colors.red),
-                              ),
-                              onPressed: signIn,
-                              child: Text(
-                                'Sign In',
-                                style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white
+                                  side: BorderSide(color: Colors.brown),
+                                ),
+                                onPressed: signIn,
+                                child: Text(
+                                  'Sign In',
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white
+                                  ),
                                 ),
                               ),
                             ),
@@ -137,10 +141,20 @@ class _SigninState extends State<Signin> {
                       Text("Don't have an account?"),
                       SizedBox(width: 10.0,),
                       RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                          side: BorderSide(color: Colors.brown),
+                        ),
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){return SignUp();}));
                         },
-                        child: Text('SIGN UP'),
+                        child: Text(
+                            'SIGN UP',
+                            style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.brown,
+                            ),
+                        ),
                       ),
                     ],
                   ),

@@ -30,7 +30,7 @@ class ShowShirtsListState extends State<ShowShirtsList> {
 
   add(){
     if(isEditing){
-      update(shirtsnew, nameInputcontroller.text);
+      update(shirtsnew, nameInputcontroller.text, int.parse(priceInputController.text));
       setState(() {
         isEditing=false;
       });
@@ -73,33 +73,48 @@ class ShowShirtsListState extends State<ShowShirtsList> {
           border: Border.all(color: Colors.brown),
           borderRadius: BorderRadius.circular(5.0),
         ),
-        child: ListTile(
-          title: Text(shirts.sname),
-          trailing: Wrap(
-            spacing: 1,
-            children: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: (){
-                    delete(shirts);
-                  }
+        child: Column(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        //Colors.yellow[200],
+                        Colors.grey,
+                        Colors.grey[300]
+                      ])
               ),
-              IconButton(
-                  icon: Icon(Icons.update),
-                  onPressed: (){
-                    print("update");
-                  }
-              )
-            ],
-          ),
-
-
-          onTap: (){
-            //update
-            print('jfhgdjhfgfjgjehbrj');
-            //setUpdateUI(dress);
-
-          },
+              child: ListTile(
+                title: Text(
+                    shirts.sname,
+                  style: TextStyle(
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                trailing: Wrap(
+                  spacing: 1,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: (){
+                          delete(shirts);
+                        }
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.update),
+                        onPressed: (){
+                          setUpdateUI(shirts);
+                        }
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
 
       ),
@@ -109,6 +124,7 @@ class ShowShirtsListState extends State<ShowShirtsList> {
   setUpdateUI(Shirts shirts){
 
     nameInputcontroller.text = shirts.sname;
+    priceInputController.text = (shirts.sprice).toString();
     setState(() {
       showTextField = true;
       isEditing = true;
@@ -179,8 +195,8 @@ class ShowShirtsListState extends State<ShowShirtsList> {
               height: 20,
             ),
             Text(
-              "Shirts",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+              "Shirts Collection Details",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.brown),
             ),
             SizedBox(
               height: 20,

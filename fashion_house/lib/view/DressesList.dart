@@ -22,7 +22,8 @@ class ShowDressList extends StatefulWidget {
 
 class ShowDressListState extends State<ShowDressList> {
   bool showTextField = false;
-  TextEditingController controller = TextEditingController();
+  TextEditingController dressNameInputcontroller = TextEditingController();
+  TextEditingController dressPriceInputController = TextEditingController();
   bool isEditing = false;
   Dresses dressnew;
   //new
@@ -31,14 +32,14 @@ class ShowDressListState extends State<ShowDressList> {
 
   add(){
     if(isEditing){
-      update(dressnew, controller.text);
+      update(dressnew, dressNameInputcontroller.text);
       setState(() {
         isEditing=false;
       });
     }else{
-      addDress(controller.text);
+      addDress(dressNameInputcontroller.text, int.parse(dressPriceInputController.text));
     }
-    controller.text='';
+    dressNameInputcontroller.text='';
   }
 
   Widget buildBody(BuildContext context) {
@@ -108,7 +109,7 @@ class ShowDressListState extends State<ShowDressList> {
 
   setUpdateUI(Dresses dress){
 
-    controller.text = dress.name;
+    dressNameInputcontroller.text = dress.name;
     setState(() {
       showTextField = true;
       isEditing = true;
@@ -159,9 +160,14 @@ class ShowDressListState extends State<ShowDressList> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 TextFormField(
-                  controller: controller,
+                  controller: dressNameInputcontroller,
                   decoration: InputDecoration(
-                      labelText: "Name",hintText:"Enter name"),
+                      labelText: "Name",hintText:"Enter Dress Name"),
+                ),
+                TextFormField(
+                  controller: dressPriceInputController,
+                  decoration: InputDecoration(
+                      labelText: "Price",hintText:"Enter Dress Price"),
                 ),
                 SizedBox(
                   height: 10,

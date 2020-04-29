@@ -8,8 +8,8 @@ getDresses() {
   return Firestore.instance.collection(collectionName).snapshots();
 }
 //add new dress
-addDress(String Name){
-  Dresses dress = Dresses(name: Name);
+addDress(String Name, int Price){
+  Dresses dress = Dresses(name: Name, price: Price);
   try{
     Firestore.instance.runTransaction(
           (Transaction transaction) async{

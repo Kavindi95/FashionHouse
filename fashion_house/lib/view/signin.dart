@@ -104,19 +104,19 @@ class _SigninState extends State<Signin> {
                         ),
                         Center(
                           child: Container(
-                            width: 250.0,
-                            height: 50.0,
+                            width: 300.0,
+                            height: 65.0,
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0.0,0.0,10.0,10.0),
                               child: RaisedButton(
                                 color: Colors.brown,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(20.0),
+                                  borderRadius: new BorderRadius.circular(40.0),
                                   side: BorderSide(color: Colors.brown),
                                 ),
                                 onPressed: signIn,
                                 child: Text(
-                                  'Sign In',
+                                  'SIGN IN',
                                   style: TextStyle(
                                       fontSize: 15.0,
                                       fontWeight: FontWeight.bold,

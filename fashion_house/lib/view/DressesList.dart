@@ -114,6 +114,19 @@ class ShowDressListState extends State<ShowDressList> {
                     )
                   ],
                 ),
+                subtitle: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0.0,10.0,8.0,8.0),
+                          child: Text('Price: Rs. '+(dress.price).toString(),style: TextStyle(fontSize: 20.0,color: Colors.pinkAccent),),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -151,6 +164,7 @@ class ShowDressListState extends State<ShowDressList> {
 
   Widget build(BuildContext context){
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Colors.brown,

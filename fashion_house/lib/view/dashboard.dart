@@ -439,7 +439,7 @@ class _DashboardState extends State<Dashboard> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(15.0,10.0,15.0,10.0),
-                  child: Text('View Order list',style: TextStyle(fontSize: 15.0),),
+                  child: Text('View Transactions',style: TextStyle(fontSize: 15.0),),
                 ),
                   color: Colors.brown[100],
                 ),

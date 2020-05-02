@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controler/shirts_api.dart';
 import '../model/shirts.dart';
-
+//list view is referenced from CTSE labsheet 6
 class ShirtsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

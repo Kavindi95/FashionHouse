@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//model basics are referenced by CTSE labsheet 6
 class Dresses{
   String name;
   int price;

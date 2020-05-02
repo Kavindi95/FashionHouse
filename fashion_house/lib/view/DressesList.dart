@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controler/dress_api.dart';
 import '../model/dresses.dart';
 
+//List view is referenced by CTSE labsheet 6
 class DressesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

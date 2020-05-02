@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dashboard.dart';
 import 'signup.dart';
-
+//Sign In page generation was inspired by the youtube tutorial "https://www.youtube.com/watch?v=13-jNF984C0"
 class Signin extends StatefulWidget {
   @override
   _SigninState createState() => _SigninState();

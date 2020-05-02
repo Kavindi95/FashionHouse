@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/dresses.dart';
 
+//API creation is refernced by the CTSE labe sheet 6
 String collectionName = "dresses";
 
 //get dresses

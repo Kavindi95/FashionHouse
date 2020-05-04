@@ -1,5 +1,8 @@
+//Please find the references with **reference** tag in the particular place in the implementation
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+//**reference**
+//The model class implementations for handling CRUD opertions on transaction data
+// is based on CTSE labsheet 06
 class TransactionDet{
   String description;
   int cost;

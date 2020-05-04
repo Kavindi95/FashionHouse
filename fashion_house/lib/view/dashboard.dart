@@ -1,3 +1,5 @@
+//Please find the references with **reference** tag in the particular place in the implementation
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../model/stockDet.dart';
@@ -41,6 +43,8 @@ class _DashboardState extends State<Dashboard> {
   ];
 
   //cardone
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardOne(name) {
     return Card(
       color: Colors.brown[50],
@@ -93,6 +97,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //cardTwo
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardTwo(name) {
     return Card(
       color: Colors.brown[50],
@@ -145,6 +151,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardThree
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardThree(name) {
     return Card(
       color: Colors.brown[50],
@@ -197,6 +205,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardFour
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardFour(name) {
     return Card(
       color: Colors.brown[50],
@@ -250,6 +260,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CadrFive
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardFive(name) {
     return Card(
       color: Colors.brown[50],
@@ -302,6 +314,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   //CardSiz
+  //**reference**
+  //in order to do the card implementation I have site this website https://api.flutter.dev/flutter/material/Card-class.html
   Widget CardSix(name) {
     return Card(
       color: Colors.brown[50],
@@ -353,25 +367,16 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-//        flexibleSpace: Container(
-//          decoration: BoxDecoration(
-//            gradient: LinearGradient(
-//                begin: Alignment.topLeft,
-//                end: Alignment.bottomRight,
-//                stops: [0.1, 0.3, 0.7, 1],
-//                colors: [Colors.amber[800], Colors.amber[700], Colors.amber[600], Colors.amber]
-//            ),
-//          ),
-//        ),
-        
           backgroundColor: Colors.brown,
         ),
+        //Navigation Drawer
+        //**reference**
+        //In order to create the navigation drawer I have follower this video tutorial
+        // https://www.youtube.com/watch?v=jDQQM1RfjNc
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
@@ -404,60 +409,77 @@ class _DashboardState extends State<Dashboard> {
                               style: TextStyle(
                                   color: Colors.brown[50], fontSize: 25.0),
                             ),
-                          )
-//
+                          ) //
                         ],
                       ),
                     ),
                   )),
+              //begining of the navigation drawer body
+              //In the body of navigation drawer there is a multirow list and the tiles of the list has been customized
+              // using a common function called 'CustomListTile'
               CustomListTile(
                 Icons.filter_1,
                 'Dresses',
                     () => {
                   //print('Hello'),
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return DressesList();})),
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return DressesList();
+                  })),
                 },
               ),
               CustomListTile(
                   Icons.filter_2,
                   'Shirts',
                       () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context){return ShirtsList();})),
-              }),
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return ShirtsList();
+                        })),
+                  }),
               CustomListTile(
                   Icons.filter_3,
                   'Pants',
                       () => {
-                        Navigator.push(context, MaterialPageRoute(builder: (context){return PantsList();})),
-                      }),
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return PantsList();
+                        })),
+                  }),
               //CustomListTile(Icons.filter_4, 'log out', () => {}),
               Padding(
-                padding: const EdgeInsets.only(top:8.0),
-                child: RaisedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return Orders();}));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(15.0,10.0,15.0,10.0),
-                  child: Text('View Transactions',style: TextStyle(fontSize: 15.0),),
-                ),
+                padding: const EdgeInsets.only(top: 8.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                          return Orders();
+                        }));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                    child: Text(
+                      'View Transactions',
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                  ),
                   color: Colors.brown[100],
                 ),
               )
             ],
           ),
         ),
-        body:StreamBuilder(
-          stream:Firestore.instance.collection('dashboardStock').snapshots(),
-          builder: (context,snapshot){
-            if(!snapshot.hasData){
+        body: StreamBuilder(
+          stream: Firestore.instance.collection('dashboardStock').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
               return Text("Luading.... please wait");
             }
-            if(snapshot.hasData){
+            if (snapshot.hasData) {
               return Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('images/bodyone.png'), fit: BoxFit.cover)),
+                        image: AssetImage('images/bodyone.png'),
+                        fit: BoxFit.cover)),
                 child: Column(
                   children: <Widget>[
                     //SizedBox(height: 25.0),
@@ -474,7 +496,7 @@ class _DashboardState extends State<Dashboard> {
                                     fontSize: 25.0, fontWeight: FontWeight.bold),
                               ),
                             )),
-                        SizedBox(width:80.0 ),
+                        SizedBox(width: 80.0),
                         Container(
                             child: Column(
                               //mainAxisAlignment: MainAxisAlignment.end,
@@ -484,10 +506,12 @@ class _DashboardState extends State<Dashboard> {
                                   color: Colors.brown[200],
                                   shape: RoundedRectangleBorder(
                                       borderRadius: new BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.brown)
-                                  ),
-                                  onPressed: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
+                                      side: BorderSide(color: Colors.brown)),
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return Signin();
+                                        }));
                                   },
                                   child: Text('SIGN OUT'),
                                 ),
@@ -516,8 +540,10 @@ class _DashboardState extends State<Dashboard> {
                           // column for card 1
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardOne(snapshot.data.documents[0]['stock'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardOne(
+                                  snapshot.data.documents[0]['stock']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -537,8 +563,10 @@ class _DashboardState extends State<Dashboard> {
                           //column for card 2
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardTwo(snapshot.data.documents[0]['shipping'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardTwo(
+                                  snapshot.data.documents[0]['shipping']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -579,8 +607,10 @@ class _DashboardState extends State<Dashboard> {
                           // column for card 3
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardThree(snapshot.data.documents[0]['orders'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardThree(
+                                  snapshot.data.documents[0]['orders']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -600,8 +630,10 @@ class _DashboardState extends State<Dashboard> {
                           //column for card 4
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardFour(snapshot.data.documents[0]['delivery'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardFour(
+                                  snapshot.data.documents[0]['delivery']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -640,8 +672,10 @@ class _DashboardState extends State<Dashboard> {
                           // column for card 5
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardFive(snapshot.data.documents[0]['revenue'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardFive(
+                                  snapshot.data.documents[0]['revenue']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -661,8 +695,10 @@ class _DashboardState extends State<Dashboard> {
                           //column for card 6
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children:
-                              stocks.map((stock) => CardSix(snapshot.data.documents[0]['cost'])).toList()),
+                              children: stocks
+                                  .map((stock) => CardSix(
+                                  snapshot.data.documents[0]['cost']))
+                                  .toList()),
                         ),
                         Expanded(
                           flex: 1,
@@ -679,15 +715,13 @@ class _DashboardState extends State<Dashboard> {
                         )
                       ],
                     ),
-
                   ],
                 ),
               );
             }
             return CircularProgressIndicator();
           },
-        )
-    );
+        ));
   }
 }
 
@@ -696,6 +730,10 @@ class CustomListTile extends StatelessWidget {
   String description;
   Function onTap;
 
+  //Customization function for tiles in the multi-row list of navigation drawer body
+  //**reference**
+  //In order to create the navigation drawer I have follower this video tutorial
+  // https://www.youtube.com/watch?v=jDQQM1RfjNc
   CustomListTile(this.icon, this.description, this.onTap);
   @override
   Widget build(BuildContext context) {

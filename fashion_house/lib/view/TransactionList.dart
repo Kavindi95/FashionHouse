@@ -1,7 +1,12 @@
+//Please find the references with **reference** tag in the particular place in the implementation
 import 'package:flutter/material.dart';
 import '../model/Transaction.dart';
 import '../controler/transaction_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+//**reference**
+//In order to implement this UI and the functionality in this page I hve refered CTSE lab sheet 6
+//https://courseweb.sliit.lk/mod/assign/view.php?id=116780
 
 class Orders extends StatefulWidget {
   @override
@@ -9,8 +14,6 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-
-
   bool showTextField = false;
   TextEditingController descriptionInputcontroller = TextEditingController();
   TextEditingController revenueInputController = TextEditingController();
@@ -18,29 +21,35 @@ class _OrdersState extends State<Orders> {
   bool isEditing = false;
   TransactionDet transnew;
 
-  add(){
-    if(isEditing){
-      update(transnew, descriptionInputcontroller.text,int.parse(costInputController.text),int.parse(revenueInputController.text));
+  add() {
+    if (isEditing) {
+      update(
+          transnew,
+          descriptionInputcontroller.text,
+          int.parse(costInputController.text),
+          int.parse(revenueInputController.text));
       setState(() {
-        isEditing=false;
+        isEditing = false;
       });
-    }else{
-      addTransaction(descriptionInputcontroller.text, int.parse(costInputController.text),int.parse(revenueInputController.text));
+    } else {
+      addTransaction(
+          descriptionInputcontroller.text,
+          int.parse(costInputController.text),
+          int.parse(revenueInputController.text));
     }
-    descriptionInputcontroller.text='';
-    costInputController.text='';
-    revenueInputController.text='';
+    descriptionInputcontroller.text = '';
+    costInputController.text = '';
+    revenueInputController.text = '';
   }
-
 
   Widget buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: getTransactions(),
       builder: (context, snapshot) {
-        if(snapshot.hasError) {
+        if (snapshot.hasError) {
           return Text('Error ${snapshot.error}');
         }
-        if(snapshot.hasData){
+        if (snapshot.hasData) {
           print("Documents ${snapshot.data.documents.length}");
           return buildList(context, snapshot.data.documents);
         }
@@ -55,10 +64,10 @@ class _OrdersState extends State<Orders> {
     );
   }
 
-  Widget buildListItem(BuildContext context, DocumentSnapshot data){
-    final transaction=TransactionDet.fromSnapshot(data);
+  Widget buildListItem(BuildContext context, DocumentSnapshot data) {
+    final transaction = TransactionDet.fromSnapshot(data);
     return Padding(
-      key:ValueKey(transaction.description),
+      key: ValueKey(transaction.description),
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -67,7 +76,6 @@ class _OrdersState extends State<Orders> {
         ),
         //wrap with a column
         child: Column(
-
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
@@ -78,31 +86,28 @@ class _OrdersState extends State<Orders> {
                         //Colors.yellow[200],
                         Colors.grey,
                         Colors.grey[300]
-                      ])
-              ),
+                      ])),
               child: ListTile(
-
                 isThreeLine: true,
-                title: Text(transaction.description,style: TextStyle(fontSize: 20.0,color: Colors.blue[900]),),
+                title: Text(
+                  transaction.description,
+                  style: TextStyle(fontSize: 20.0, color: Colors.blue[900]),
+                ),
                 trailing: Wrap(
                   spacing: 1,
                   children: <Widget>[
                     IconButton(
                         icon: Icon(Icons.delete),
-                        onPressed: (){
+                        onPressed: () {
                           delete(transaction);
-                        }
-                    ),
+                        }),
                     IconButton(
                         icon: Icon(Icons.update),
-                        onPressed: (){
+                        onPressed: () {
                           print("update");
                           setUpdateUI(transaction);
-                        }
-                    ),
-
+                        }),
                   ],
-
                 ),
                 subtitle: Column(
                   children: <Widget>[
@@ -110,48 +115,45 @@ class _OrdersState extends State<Orders> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0,10.0,8.0,8.0),
-                          child: Text('Cost '+(transaction.cost).toString(),style: TextStyle(fontSize: 20.0,color: Colors.red),),
+                          padding:
+                          const EdgeInsets.fromLTRB(0.0, 10.0, 8.0, 8.0),
+                          child: Text(
+                            'Cost ' + (transaction.cost).toString(),
+                            style: TextStyle(fontSize: 20.0, color: Colors.red),
+                          ),
                         ),
-
                       ],
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0.0,10.0,8.0,8.0),
-                          child: Text('Revenue '+(transaction.revenue).toString(),style: TextStyle(fontSize: 20.0,color: Colors.green[800],fontWeight: FontWeight.bold),),
+                          padding:
+                          const EdgeInsets.fromLTRB(0.0, 10.0, 8.0, 8.0),
+                          child: Text(
+                            'Revenue ' + (transaction.revenue).toString(),
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.green[800],
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-
                       ],
                     )
                   ],
                 ),
-
-
-
-//          onTap: (){
-//            //update
-//            print('jfhgdjhfgfjgjehbrj');
-//            //setUpdateUI(dress);
-//
-//          },
               ),
             ),
           ],
         ),
-
       ),
     );
   }
 
-  setUpdateUI(TransactionDet tr){
-
-     descriptionInputcontroller.text = tr.description;
-     costInputController.text=(tr.cost).toString();
-     revenueInputController.text=(tr.revenue).toString();
+  setUpdateUI(TransactionDet tr) {
+    descriptionInputcontroller.text = tr.description;
+    costInputController.text = (tr.cost).toString();
+    revenueInputController.text = (tr.revenue).toString();
     setState(() {
       showTextField = true;
       isEditing = true;
@@ -159,12 +161,13 @@ class _OrdersState extends State<Orders> {
     });
   }
 
-  button(){
+  button() {
     return SizedBox(
       width: double.infinity,
       child: OutlineButton(
         child: Text(isEditing ? "UPDATE" : "ADD"),
-        onPressed: (){
+        onPressed: () {
+          //calling the add() function
           add();
           setState(() {
             showTextField = false;
@@ -173,6 +176,10 @@ class _OrdersState extends State<Orders> {
       ),
     );
   }
+
+  //**reference**
+  //In order to implement this form I have refered the CTSE lab sheet 6
+  // https://courseweb.sliit.lk/mod/assign/view.php?id=116780
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +189,7 @@ class _OrdersState extends State<Orders> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: (){
+            onPressed: () {
               setState(() {
                 showTextField = !showTextField;
               });
@@ -192,7 +199,7 @@ class _OrdersState extends State<Orders> {
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
-        child:Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -204,17 +211,18 @@ class _OrdersState extends State<Orders> {
                 TextFormField(
                   controller: descriptionInputcontroller,
                   decoration: InputDecoration(
-                      labelText: "Description",hintText:"Enter description"),
+                      labelText: "Description",
+                      hintText: "Enter description"),
                 ),
                 TextFormField(
                   controller: revenueInputController,
                   decoration: InputDecoration(
-                      labelText: "Revenue",hintText:"Enter revenue"),
+                      labelText: "Revenue", hintText: "Enter revenue"),
                 ),
                 TextFormField(
                   controller: costInputController,
                   decoration: InputDecoration(
-                      labelText: "Cost",hintText:"Enter cost"),
+                      labelText: "Cost", hintText: "Enter cost"),
                 ),
                 SizedBox(
                   height: 10,
@@ -222,13 +230,16 @@ class _OrdersState extends State<Orders> {
                 button(),
               ],
             )
-                :Container(),
+                : Container(),
             SizedBox(
               height: 20,
             ),
             Text(
               "Transactions",
-              style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 20,

@@ -1,16 +1,18 @@
+//Please find the references with **reference** tag in the particular place in the implementation
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/Transaction.dart';
-
+//**reference**
+//The API implementations for handling CRUD opertions on transaction data is based on CTSE labsheet 06
 String collectionName = "transactions";
 
+//get transaction
 getTransactions() {
   return Firestore.instance.collection(collectionName).snapshots();
 }
 
-
+//add transaction
 addTransaction(String description, int cost, int revenue){
   TransactionDet tr = TransactionDet(description: description, cost: cost,revenue:revenue);
-  //Shirts dressPrice = Shirts(sprice: Price);
   try{
     Firestore.instance.runTransaction(
           (Transaction transaction) async{
@@ -35,7 +37,7 @@ update(TransactionDet tr, String description, int cost, int revenue){
     print(e.toString());
   }
 }
-//delete a pant
+//delete transaction
 delete(TransactionDet tr){
   Firestore.instance.runTransaction(
         (Transaction transaction) async{

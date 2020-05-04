@@ -1,8 +1,6 @@
+//Please find the references with **reference** tag in the particular place in the implementation
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../controler/user_api.dart';
-import '../main.dart';
-import '../view/dashboard.dart';
 import 'signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,7 +10,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-
   //***
   String _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -39,12 +36,11 @@ class _SignUpState extends State<SignUp> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
-
             children: <Widget>[
               //Divider(height: 70.0,),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0,70.0,20.0,10.0),
+                  padding: const EdgeInsets.fromLTRB(0.0, 70.0, 20.0, 10.0),
                   child: CircleAvatar(
                     backgroundImage: AssetImage('images/logo.png'),
                     radius: 80.0,
@@ -59,29 +55,31 @@ class _SignUpState extends State<SignUp> {
 //                  style: TextStyle(fontStyle: FontStyle.italic,fontSize: 30.0),),
 //              ],
 //            ),
-              Divider(height:70.0,
-                thickness: 5.0,),
+              Divider(
+                height: 70.0,
+                thickness: 5.0,
+              ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
                   child: SizedBox(
                     height: 50.0,
                     child: TextFormField(
-                      validator: (input){
-                        if(input.isEmpty){
-                          return'Please type email';
+                      validator: (input) {
+                        if (input.isEmpty) {
+                          return 'Please type email';
                         }
                       },
                       onSaved: (input) => _email = input,
                       decoration: InputDecoration(
                           filled: true,
-
                           border: new OutlineInputBorder(
                             borderRadius: const BorderRadius.all(
                               const Radius.circular(30.0),
                             ),
                           ),
-                          labelText: "Username",hintText:"Enter Username"),
+                          labelText: "Username",
+                          hintText: "Enter Username"),
                     ),
                   ),
                 ),
@@ -93,9 +91,9 @@ class _SignUpState extends State<SignUp> {
                     height: 50.0,
                     child: TextFormField(
                       obscureText: true,
-                      validator: (input){
-                        if(input.length<6){
-                          return'Please enter password more than 6 characters';
+                      validator: (input) {
+                        if (input.length < 6) {
+                          return 'Please enter password more than 6 characters';
                         }
                       },
                       onSaved: (input) => _password = input,
@@ -106,7 +104,8 @@ class _SignUpState extends State<SignUp> {
                               const Radius.circular(30.0),
                             ),
                           ),
-                          labelText: "Password",hintText:"Enter password"),
+                          labelText: "Password",
+                          hintText: "Enter password"),
                     ),
                   ),
                 ),
@@ -118,41 +117,59 @@ class _SignUpState extends State<SignUp> {
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.red)
-                    ),
+                        side: BorderSide(color: Colors.red)),
                     onPressed: signUp,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('SIGN UP',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0,color: Colors.white),),
+                      child: Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 20.0,
+                            color: Colors.white),
+                      ),
                     ),
-                    color: Colors.orangeAccent[700],),
+                    color: Colors.orangeAccent[700],
+                  ),
                 ),
               ),
-              SizedBox(height: 80.0,),
+              SizedBox(
+                height: 80.0,
+              ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0,12.0,0.0,12.0),
-                  child: Text('Already have an account?',style: TextStyle(fontSize: 15.0),),
+                  padding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 12.0),
+                  child: Text(
+                    'Already have an account?',
+                    style: TextStyle(fontSize: 15.0),
+                  ),
                 ),
               ),
               Center(
                 child: SizedBox(
                   width: 290.0,
                   child: RaisedButton(
-
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.red)
-                    ),
-                    onPressed: (){
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
+                        side: BorderSide(color: Colors.red)),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return Signin();
+                          }));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('SIGN IN',style: TextStyle(fontStyle: FontStyle.italic,fontSize: 20.0,color: Colors.white),),
+                      child: Text(
+                        'SIGN IN',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 20.0,
+                            color: Colors.white),
+                      ),
                     ),
-                    color: Colors.redAccent,),
+                    color: Colors.redAccent,
+                  ),
                 ),
               )
             ],
@@ -162,18 +179,22 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Future<void> signUp() async{
+  //**reference**
+  //In order to do the firebase user authentication i have followed this video https://www.youtube.com/watch?v=bXlMNfwhlwg
+  Future<void> signUp() async {
     final formState = _formKey.currentState;
-    if(formState.validate()){
+    if (formState.validate()) {
       formState.save();
-      try{
-        FirebaseUser user= (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password)).user;
+      try {
+        FirebaseUser user = (await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+            email: _email, password: _password))
+            .user;
         user.sendEmailVerification();
-        //print(result);
-        //FirebaseUser user = result.user;
-        //await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context){return Signin();}));
-      }catch(e){
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Signin();
+        }));
+      } catch (e) {
         print(e.message);
       }
     }

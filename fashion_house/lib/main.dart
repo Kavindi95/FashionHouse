@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'view/dashboard.dart';
-import 'view/signin.dart';
-import 'view/signup.dart';
+import 'HomeSplashScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Signin(),
+      home: HomeSplashScreen(),
     );
   }
 }

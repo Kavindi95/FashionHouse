@@ -36,7 +36,7 @@ class _SigninState extends State<Signin> {
             children: <Widget>[
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0,50.0,20.0,10.0),
+                  padding: const EdgeInsets.fromLTRB(0.0, 70.0, 20.0, 10.0),
                   child: CircleAvatar(
                     backgroundImage: AssetImage('images/logo.png'),
                     radius: 60.0,

@@ -63,7 +63,7 @@ class _SignUpState extends State<SignUp> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 0.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     child: TextFormField(
                       validator: (input) {
                         if (input.isEmpty) {
@@ -78,8 +78,8 @@ class _SignUpState extends State<SignUp> {
                               const Radius.circular(30.0),
                             ),
                           ),
-                          labelText: "Username",
-                          hintText: "Enter Username"),
+                          labelText: "email",
+                          hintText: "Enter email"),
                     ),
                   ),
                 ),
@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 20.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     child: TextFormField(
                       obscureText: true,
                       validator: (input) {
@@ -134,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               SizedBox(
-                height: 80.0,
+                height: 35.0,
               ),
               Center(
                 child: Padding(
